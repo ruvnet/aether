@@ -1,0 +1,12 @@
+{
+  "name": "aether",
+  "version": "1.0.0",
+  "description": "A little universe, entirely yours. A browser-local particle artwork.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "svgs": "node scripts/generate-svgs.mjs",
+    "screenshots": "node scripts/screenshots.mjs"
+  }
+}

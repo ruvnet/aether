@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#08110f" />
+    <meta
+      name="description"
+      content="A little universe, entirely yours. Shape thousands of luminous particles, explore five worlds, and find a moment of wonder."
+    />
+    <title>Aether — A little universe, entirely yours</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2308110f'/%3E%3Cpath d='M32 7 38 26 57 32 38 38 32 57 26 38 7 32 26 26Z' fill='%23d2edbc'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg style="display: none" aria-hidden="true">
+      <defs>
+        <symbol id="spark" viewBox="0 0 24 24">
+          <path d="m12 2 2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7Z" />
+        </symbol>
+        <symbol id="orbit" viewBox="0 0 24 24">
+          <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(-35 12 12)" />
+          <circle cx="12" cy="12" r="5" />
+          <circle cx="19" cy="6" r="1.4" fill="currentColor" />
+        </symbol>
+        <symbol id="sphere" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" />
+          <ellipse cx="12" cy="12" rx="4" ry="9" />
+          <path d="M3 12h18M5 6.5c5 3 9 3 14 0M5 17.5c5-3 9-3 14 0" />
+        </symbol>
+        <symbol id="wave" viewBox="0 0 24 24">
+          <path d="M2 8c4-9 6 9 10 0s6 9 10 0M2 16c4-9 6 9 10 0s6 9 10 0" />
+        </symbol>
+        <symbol id="flower" viewBox="0 0 24 24">
+          <path d="M12 12C-3-1 25-1 12 12s15 15 0 0-15 15 0 0 15-15 0 0-15-15 0 0 15 15 0 0" />
+          <circle cx="12" cy="12" r="9" />
+        </symbol>
+        <symbol id="ring" viewBox="0 0 24 24">
+          <ellipse cx="12" cy="12" rx="9" ry="6" transform="rotate(-30 12 12)" />
+          <ellipse cx="12" cy="12" rx="5" ry="3" transform="rotate(-30 12 12)" />
+        </symbol>
+        <symbol id="sliders" viewBox="0 0 24 24">
+          <path d="M4 7h8m4 0h4M4 17h3m4 0h9" />
+          <circle cx="14" cy="7" r="2" />
+          <circle cx="9" cy="17" r="2" />
+        </symbol>
+        <symbol id="camera" viewBox="0 0 24 24">
+          <path d="M8 5 6 8H3v12h18V8h-3l-2-3Z" />
+          <circle cx="12" cy="14" r="4" />
+        </symbol>
+        <symbol id="shuffle-icon" viewBox="0 0 24 24">
+          <path
+            d="M3 6h3c5 0 7 12 12 12h3m-4-4 4 4-4 4M3 18h3c2 0 4-3 5-6m2-3c2-3 3-3 5-3h3m-4-4 4 4-4 4"
+          />
+        </symbol>
+        <symbol id="audio" viewBox="0 0 24 24">
+          <path d="M3 10v4m4-7v10m5-14v18m5-14v10m4-7v4" />
+        </symbol>
+        <symbol id="hand" viewBox="0 0 24 24">
+          <path
+            d="m7 12-2-2c-2-2-4 0-2 2l7 9h7l4-7V9c0-3-3-3-3 0v3-8c0-3-3-3-3 0v7-9c0-2-3-2-3 0v9-8c0-2-3-2-3 0v10Z"
+          />
+        </symbol>
+      </defs>
+    </svg>
+    <canvas
+      id="cosmos"
+      aria-label="Interactive luminous particle universe. Move to bend space; click to send a ripple. Use the world buttons to change its shape."
+    ></canvas>
+    <div class="interface">
+      <header>
+        <div class="brand-row">
+          <div class="brand">
+            <svg><use href="#spark" /></svg>aether<span style="color: #7c957f">.</span>
+          </div>
+          <span class="edition">An experiment in wonder</span>
+        </div>
+        <nav class="header-actions" aria-label="Experience">
+          <button class="about" id="about">The experience ↗</button
+          ><button class="sound" id="sound" aria-pressed="false">
+            <svg><use href="#audio" /></svg><span id="sound-label">Sound off</span></button
+          ><button class="icon" id="help" aria-label="How to explore">
+            <span style="font-size: 13px">?</span>
+          </button>
+        </nav>
+      </header>
+      <main>
+        <section class="intro">
+          <div class="eyebrow"><span class="live-dot"></span>A little universe, entirely yours</div>
+          <h1>Make room<br />for <em>wonder.</em></h1>
+          <p>
+            No destination. No right way.<br />Just you, a thousand possibilities,<br />and a moment
+            to get lost.
+          </p>
+          <div class="gesture">
+            <svg><use href="#hand" /></svg>Move to attract · Click to ripple
+          </div>
+        </section>
+        <div class="scene-meta">
+          <div class="label">Particles in motion</div>
+          <div class="number" id="particle-count">2,800<span>∞ possibilities</span></div>
+        </div>
+        <div class="coordinate" aria-hidden="true">
+          EST. NOW &nbsp; / &nbsp; SOMEWHERE IN THE INFINITE
+        </div>
+        <section class="world-note" aria-live="polite">
+          <div class="index" id="world-index">01 — 05 / WORLDS</div>
+          <h2 id="world-title">The spiral galaxy</h2>
+          <p id="world-description">
+            A thousand little lights.<br />One beautifully imperfect orbit.
+          </p>
+          <div class="mini-line"></div>
+        </section>
+      </main>
+      <section class="settings" id="settings" aria-label="Tune your universe" hidden>
+        <h2>Tune your universe <span>LIVE</span></h2>
+        <div class="slider-row">
+          <label for="energy">Energy <output id="energy-value">50%</output></label
+          ><input type="range" id="energy" min="0" max="100" value="50" />
+        </div>
+        <div class="slider-row">
+          <label for="gravity">Gravity <output id="gravity-value">60%</output></label
+          ><input type="range" id="gravity" min="0" max="100" value="60" />
+        </div>
+        <div class="slider-row">
+          <label>Atmosphere <span id="palette-name">Sage</span></label>
+          <div class="palette" role="group" aria-label="Color atmosphere">
+            <button
+              class="swatch"
+              style="background: #d2edbc"
+              data-palette="0"
+              aria-label="Sage atmosphere"
+              aria-pressed="true"
+            ></button
+            ><button
+              class="swatch"
+              style="background: #efc394"
+              data-palette="1"
+              aria-label="Ember atmosphere"
+              aria-pressed="false"
+            ></button
+            ><button
+              class="swatch"
+              style="background: #9dcfea"
+              data-palette="2"
+              aria-label="Glacier atmosphere"
+              aria-pressed="false"
+            ></button
+            ><button
+              class="swatch"
+              style="background: #e9aec6"
+              data-palette="3"
+              aria-label="Rose atmosphere"
+              aria-pressed="false"
+            ></button>
+          </div>
+        </div>
+        <div class="setting-foot">A small change can create a whole new feeling.</div>
+      </section>
+      <div class="bottom">
+        <div class="toolbar">
+          <div class="worlds" role="group" aria-label="Explore worlds">
+            <button class="world" data-world="0" aria-pressed="true">
+              <svg><use href="#orbit" /></svg>Galaxy</button
+            ><button class="world" data-world="1" aria-pressed="false">
+              <svg><use href="#sphere" /></svg>Sphere</button
+            ><button class="world" data-world="2" aria-pressed="false">
+              <svg><use href="#wave" /></svg>Wave</button
+            ><button class="world" data-world="3" aria-pressed="false">
+              <svg><use href="#flower" /></svg>Bloom</button
+            ><button class="world" data-world="4" aria-pressed="false">
+              <svg><use href="#ring" /></svg>Orbit
+            </button>
+          </div>
+          <div class="tools">
+            <button class="icon" id="pause" aria-label="Pause motion" aria-pressed="false">
+              <svg id="pause-icon" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14" /></svg></button
+            ><button class="icon" id="shuffle" aria-label="Discover a random universe">
+              <svg><use href="#shuffle-icon" /></svg></button
+            ><button
+              class="icon"
+              id="tune"
+              aria-expanded="false"
+              aria-controls="settings"
+              aria-label="Tune your universe"
+            >
+              <svg><use href="#sliders" /></svg></button
+            ><button class="capture" id="capture">
+              <svg><use href="#camera" /></svg><span>Keep this moment</span>
+            </button>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="footer-left">
+            <span class="live-dot"></span><span>A moment outside the ordinary.</span>
+          </div>
+          <div class="footer-right">
+            <span><span class="key">1–5</span> Explore worlds</span
+            ><span><span class="key">Space</span> Pause</span
+            ><button id="footer-help">Made for curiosity ↗</button>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <dialog id="guide" aria-labelledby="guide-title">
+      <button class="icon close" id="close-guide" aria-label="Close guide">✕</button>
+      <div class="eyebrow">There is no right way</div>
+      <h2 id="guide-title">Stay a little.<br />See what happens.</h2>
+      <p>
+        Aether is a small space for curiosity. Thousands of points become galaxies, oceans, and
+        impossible flowers. You give them a little gravity.
+      </p>
+      <dl>
+        <dt>Move / touch</dt>
+        <dd>Gently bend the particles</dd>
+        <dt>Click / tap</dt>
+        <dd>Send a ripple through space</dd>
+        <dt>1 – 5</dt>
+        <dd>Discover another world</dd>
+        <dt>Space</dt>
+        <dd>Pause and take it all in</dd>
+        <dt>S / R</dt>
+        <dd>Sound / random universe</dd>
+        <dt>Keep this moment</dt>
+        <dd>Save your universe as a PNG</dd>
+      </dl>
+      <p class="dialog-foot">
+        Sound is optional. Headphones are lovely.<br />Everything is drawn live, right here in your
+        browser.
+      </p>
+    </dialog>
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>

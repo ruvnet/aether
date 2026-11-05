@@ -9,7 +9,7 @@
 A browser-local particle artwork: 2,800 luminous points that morph between five 3D worlds,
 bend around your pointer, ripple when you click, and hum along to a synthesized ambient soundtrack.
 
-One HTML file · no build step · no dependencies · everything is drawn live on a `<canvas>`.
+**[▶ Live demo](https://ruvnet.github.io/aether/)** · one self-contained HTML file · no dependencies · everything is drawn live on a `<canvas>`.
 
 </div>
 
@@ -149,11 +149,39 @@ tuck away.
 
 ```
 aether/
-├── index.html          # the whole experience: markup, styles and script
-└── docs/
-    ├── svg/            # animated SVGs used in this README
-    └── screenshots/    # screenshots of the running app
+├── index.html          # single-file build of the app (generated; this is what GitHub Pages serves)
+├── src/
+│   ├── index.html      # markup
+│   ├── styles.css      # all styling, including responsive and reduced-motion rules
+│   └── app.js          # particles, worlds, rendering, audio, controls
+├── scripts/
+│   ├── build.mjs           # inlines src/ into the root index.html
+│   ├── generate-svgs.mjs   # generates the animated SVGs in docs/svg/
+│   └── screenshots.mjs     # captures docs/screenshots/ with headless Chrome
+├── docs/
+│   ├── svg/            # animated SVGs used in this README
+│   └── screenshots/    # screenshots of the running app
+└── package.json
 ```
+
+## Development
+
+Edit the files in `src/`. You can open `src/index.html` directly in a browser while you work: it
+loads `styles.css` and `app.js` alongside it. When you're done, regenerate the single-file build:
+
+```bash
+npm run build          # src/ → index.html (no dependencies, just Node)
+```
+
+The README's media can be regenerated too:
+
+```bash
+npm run svgs           # rewrites docs/svg/*.svg
+npm run screenshots    # rewrites docs/screenshots/*.png (needs Node 22+ and Chrome; set CHROME_PATH if needed)
+```
+
+Commit the rebuilt `index.html` along with your `src/` changes, since that's the file the live site
+serves.
 
 ## Browser support
 
